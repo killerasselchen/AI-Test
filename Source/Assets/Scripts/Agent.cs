@@ -5,6 +5,7 @@ using System.Collections.Generic;
 class Agent : MonoBehaviour 
 {
     public float Speed;
+    public float Health = 100;
 
     public Vector3 playerPos;
     public Vector3 agentStartPos;
@@ -18,7 +19,7 @@ class Agent : MonoBehaviour
     public bool AgentAttack = false;
     public bool AgentIsAtStartPos = true;
 
-    public AgentStatesHandler State = new GuardingAgent();
+    public AgentStatesHandler State = new AgentGuard();
 
     public GameObject WP1;
     public GameObject WP2;

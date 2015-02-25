@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-class PatrolAgent : AgentStatesHandler
+class AgentPatrol : AgentStatesHandler
 {
     public override void Handle(Agent agent)
     {
@@ -30,7 +30,7 @@ class PatrolAgent : AgentStatesHandler
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
-            agent.State = new GuardingAgent();
+            agent.State = new AgentGuard();
         }
         else
         {
