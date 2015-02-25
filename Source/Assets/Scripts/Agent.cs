@@ -19,25 +19,23 @@ class Agent : MonoBehaviour
     public bool AgentAttack = false;
     public bool AgentIsAtStartPos = true;
 
-    public AgentStatesHandler State = new AgentGuard();
+    public Vector3 NextWaypoint;
+    public Vector3 LastWaypoint;
+    public Vector3 PenultimateWaypoint;
+    public GameObject[] Waypoints;
+    public GameObject[] Agents;
 
-    public GameObject WP1;
-    public GameObject WP2;
-    public GameObject WP3;
-    public GameObject WP4;
-    public GameObject WP5;
-    public GameObject WP6;
-    public GameObject WP7;
-    public GameObject WP8;
-    public GameObject WP9;
-    //public enum WPs { wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wp9 };
+    public AgentStatesHandler State = new AgentGuard();
 
     public Vector3 nextWaypoint;
 
     void Start()
     {
         agentStartPos = transform.position;
-        nextWaypoint = WP1.transform.position;
+        SearchWaypoints();
+        SelectNewWaypoint();
+        LastWaypoint = Waypoints[0].transform.position;
+        PenultimateWaypoint = Waypoints[0].transform.position;
     }
 
 	void Update()
@@ -57,5 +55,26 @@ class Agent : MonoBehaviour
     {
         ViewrangeSphere.transform.localScale = new Vector3(AgentViewrange * 2, AgentViewrange * 2, AgentViewrange * 2);
         ReachSpehre.transform.localScale = new Vector3(AgentReach, AgentReach, AgentReach);
+    }
+    
+    protected void SearchWaypoints()
+    {
+        Waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+    }
+
+    public void SelectNewWaypoint()
+    {
+        PenultimateWaypoint = LastWaypoint;
+        LastWaypoint = NextWaypoint;
+
+        while (NextWaypoint == LastWaypoint || NextWaypoint == PenultimateWaypoint)
+        {
+            NextWaypoint = Waypoints[Random.Range(0, Waypoints.Length)].transform.position;
+        }
+    }
+
+    public void SearchAgents()
+    {
+        Agents = GameObject.FindGameObjectsWithTag("Agent");
     }
 }

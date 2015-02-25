@@ -38,58 +38,16 @@ class AgentPatrol : AgentStatesHandler
             agent.AgentAttack = false;
             agent.AgentViewrange = 8;
 
-            if (Vector3.Distance(agent.nextWaypoint, agent.transform.position) <= 1)
+            if (Vector3.Distance(agent.NextWaypoint, agent.transform.position) <= 1)
             {
-                WaypointSelection(agent);
+                agent.SelectNewWaypoint();
             }
             else
             {
                 agent.Speed = 0.25f;
-                agent.transform.LookAt(agent.nextWaypoint);
+                agent.transform.LookAt(agent.NextWaypoint);
                 agent.transform.Translate(new Vector3(0, 0, agent.Speed));
             }
-        }
-    }
-
-    void WaypointSelection(Agent agent)
-    {
-        int rdm = Random.Range(0, 8);
-       
-        if(rdm == 0)
-        {
-            agent.nextWaypoint = agent.WP1.transform.position;
-        }
-        else if(rdm == 1)
-        {
-            agent.nextWaypoint = agent.WP2.transform.position;
-        }
-        else if(rdm == 2)
-        {
-            agent.nextWaypoint = agent.WP3.transform.position;
-        }
-        else if(rdm == 3)
-        {
-            agent.nextWaypoint = agent.WP4.transform.position;
-        }
-        else if(rdm == 4)
-        {
-            agent.nextWaypoint = agent.WP5.transform.position;
-        }
-        else if(rdm == 5)
-        {
-            agent.nextWaypoint = agent.WP6.transform.position;
-        }
-        else if(rdm == 6)
-        {
-            agent.nextWaypoint = agent.WP7.transform.position;
-        }
-        else if(rdm == 7)
-        {
-            agent.nextWaypoint = agent.WP8.transform.position;
-        }
-        else if(rdm == 8)
-        {
-            agent.nextWaypoint = agent.WP9.transform.position;
         }
     }
 }
